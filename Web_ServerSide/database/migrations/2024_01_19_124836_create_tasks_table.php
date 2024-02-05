@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('tasks', function (Blueprint $table) {
+            $table->id();
+            $table->string("name");
+            $table->text("description")->nullable();
+            $table->date("due_at")->nullable();
+            $table->boolean("status")->nullable();
+            $table->unsignedBigInteger("user_id");//coluna do mesmo tipo da chave primária
+            $table->foreign("user_id")->references("id")->on("users");//cria chave estrageira
+            $table->timestamps();
+
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('tasks');
+    }
+};
