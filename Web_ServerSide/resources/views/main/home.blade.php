@@ -4,13 +4,18 @@
 @section('content2')
 
 <h3>Hello World, estamos nas Views</h3>
+@auth
+    <h3>Olá, {{Auth::user()->name}} </h3>
+@endauth
 <p>Tens disponíveis estes links:</p>
 
 <ul>
+
     <li><a href="{{route('bemvindos')}}">Vai para casa!</a></li>
     <li><a href="{{route('users.add')}}">Adicionar utilizadores!</a></li>
     <li><a href="{{route('users.all')}}">Todos utilizadores!</a></li>
     <li><a href="{{route('tasks.all')}}">Todas as tasks!</a></li>
+    <li><a href="{{route('backoffice.dashboard')}}">BackOffice!</a></li>
 
 </ul>
 

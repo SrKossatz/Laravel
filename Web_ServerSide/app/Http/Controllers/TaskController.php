@@ -56,10 +56,11 @@ class TaskController extends Controller
 
     public function createTask(Request $request){
 
+        //fazer validação backEnd
         $request->validate([
             'name' => 'required|string|max:50',
-            'description' => 'required|string|max:100',
-            'user_id' => 'required|integer'
+            'description' => 'required|string|max:200',
+            'user_id' => 'required|integer|exists:users,id'
         ]);
 
         Task::insert([
@@ -72,6 +73,13 @@ class TaskController extends Controller
     }
 
     public function updateTask(Request $request){
+
+        $request->validate([
+            'name' => 'required|string|max:50',
+            'description' => 'required|string|max:200',
+            'user_id' => 'required|integer|exists:users,id'
+        ]);
+
 
         Task::where('id', $request->id)
         ->update([

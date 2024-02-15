@@ -2,6 +2,12 @@
 @section('content')
     <h1>Olá, sou tarefas</h1>
 
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
+
     <table class="table">
         <thead>
             <tr>
@@ -24,8 +30,8 @@
                     <td>{{ $item->due_at }}</td>
                     <td>{{ $item->status }}</td>
                     <td>{{ $item->usname }}</td>
-                    <td><a class="btn btn-info" href="{{route('tasks.view', $item->id )}}">Ver</a></td>
-                    
+                    <td><a class="btn btn-info" href="{{route('tasks.view', $item->id )}}">Ver / Atualizar</a></td>
+
                     <td><a class="btn btn-danger" href="{{route('tasks.delete', $item->id )}}">Apagar</a></td>
                 </tr>
             @endforeach

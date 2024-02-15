@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\IndexController;
-
-
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +29,14 @@ Route::get('/users/add', [UserController::class, 'users'])->name('users.add');
 Route::post('/users/create', [UserController::class, 'createUser'])->name('user.create');
 Route::post('/users/update', [UserController::class, 'updateUser'])->name('user.update');
 
+// middleware só libera acesso a rota users/all se estiver auth (logado)
+// Route::get('/users/all', [UserController::class, 'allUsers'])->name('users.all')->middleware('auth');
 Route::get('/users/all', [UserController::class, 'allUsers'])->name('users.all');
+
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('backoffice.dashboard')->middleware('auth');
+
+
+
 Route::get('/users/view/{id}', [UserController::class, 'viewUser'])->name('users.view');
 Route::get('/users/delete/{id}', [UserController::class, 'deleteUser'])->name('users.delete');
 
@@ -41,6 +48,9 @@ Route::get('/tasks/delete/{id}', [TaskController::class, 'deleteTask'])->name('t
 
 Route::get('/tasks/add', [TaskController::class, 'addTask'])->name('tasks.add');
 Route::post('tasks/create', [TaskController::class, 'createTask'])->name('tasks.create');
+
+
+
 Route::post('tasks/update', [TaskController::class, 'updateTask'])->name('tasks.update');
 
 
