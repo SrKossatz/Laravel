@@ -33,7 +33,7 @@ Route::post('/users/update', [UserController::class, 'updateUser'])->name('user.
 // Route::get('/users/all', [UserController::class, 'allUsers'])->name('users.all')->middleware('auth');
 Route::get('/users/all', [UserController::class, 'allUsers'])->name('users.all');
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('backoffice.dashboard')->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('backoffice.dashboard');
 
 
 

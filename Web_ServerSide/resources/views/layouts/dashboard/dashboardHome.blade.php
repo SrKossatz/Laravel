@@ -1,9 +1,20 @@
 @extends('layouts.femaster')
 
-@if(Auth::user()->user_type == 1)
-    <div class="alert alert-info" role="alert">
-        Acesso Administrador
-    </div>
-    @endif
+@section('content')
+    <h1>
+        Olá, @auth
+            {{ Auth::user()->name }}
+        @endauth estás no Back Office
 
-<h1>Bem-vindo, {{ Auth::user()->name }}</h1>
+        @auth
+
+        @if($message)
+
+            <div class="alert alert-success">
+                <h4>Conta administrador</h4>
+            </div>
+        @endif
+
+        @endauth
+    </h1>
+@endsection
